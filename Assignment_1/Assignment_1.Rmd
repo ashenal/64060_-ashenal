@@ -1,0 +1,72 @@
+---
+title: "Assignment_1.rmd"
+author: "Andrew Shenal"
+date: "2025-09-04"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This cell loads the tidyverse package which is very helpful for data manipulation in R
+```{r message=FALSE, warning=FALSE}
+
+# Set up key functions for R and manipulating data
+library(tidyverse)
+```
+
+
+The code below imports the data from the R project then uses two methods for basic descriptive statistics. Sapply (found in the R documentation) is used to acquire mean, median, and range variables. Summary() is used across the whole dataset as an alternative method of acquiring descriptive statistics. 
+
+```{r warning=FALSE}
+# Data acquired from Kaggle website: Berk Erisen - "Wind Turbine Scada Dataset: 2018 Scada Data of a Wind Turbine in Turkey".
+Wind <- read_csv("./archive/T1.csv")
+
+
+# Descriptive Statistics using sapply
+means <- sapply(Wind, mean, na.rm = TRUE)
+median <- sapply(Wind, median, na.rm = TRUE)
+range <- sapply(Wind, range, na.rm = TRUE)
+
+print(means)
+print(median)
+print(range)
+
+# Descriptive Statistics using summary
+summary(Wind)
+
+```
+
+
+I converted the wind speed variable which is in m/s to feet per second by multiplying the column by 3.28084. 
+
+```{r}
+
+# Variable Transformation
+Wind %>% 
+  mutate(`Wind Speed (feet/s)` = `Wind Speed (m/s)`*3.28084) %>% 
+  head()
+
+```
+
+Below is a scatterplot containing wind speed on the x axis and power generated from the wind turbine on the y axis.
+
+```{r}
+
+plot(Wind$`Wind Speed (m/s)`, Wind$`LV ActivePower (kW)`,
+     xlab = "Wind Speed (m/s)", ylab = "LV ActivePower (kW)")
+
+```
+
+
+Below is a histogram plot of the power created over the course of the data collection period. 
+
+```{r}
+
+hist(Wind$`LV ActivePower (kW)`,
+     xlab = "LV ActivePower (kW)")
+
+```
