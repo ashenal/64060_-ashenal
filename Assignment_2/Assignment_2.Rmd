@@ -1,0 +1,38 @@
+---
+title: "Assignment_2"
+author: "Andrew Shenal"
+date: "2025-09-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+1. Load in data and create dummy variables
+
+```{r}
+
+Bank <- read.csv("./UniversalBank.csv")
+
+dummy_model <- dummyVars(~US,data=Bank)
+
+
+```
+
+
+
+create partition: 40% testing, 60% training
+
+```{r}
+
+Train_index <- createDataPartition(Carseats$Sales, p=0.75, list=FALSE)
+
+Train_Data <- Carseats[Train_index,]
+Test_Data <- Carseats[-Train_index,]
+
+
+```
+
