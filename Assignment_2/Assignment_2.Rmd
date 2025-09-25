@@ -17,7 +17,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Bank <- read.csv("./UniversalBank.csv")
 
-dummy_model <- dummyVars(~US,data=Bank)
+dummy_model <- dummyVars(~Education,data=Bank)
+dummy_vars <- predict(dummy_model, Bank)
 
 
 ```
