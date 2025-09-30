@@ -1,0 +1,568 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Assignment\_2},
+  pdfauthor={Andrew Shenal},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Assignment\_2}
+\author{Andrew Shenal}
+\date{2025-09-25}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'caret' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(FNN)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'FNN' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v lubridate 1.9.4     v tibble    3.2.1
+## v purrr     1.0.4     v tidyr     1.3.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## x purrr::lift()   masks caret::lift()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Bank }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./UniversalBank.csv"}\NormalTok{)}
+
+\CommentTok{\# Normalize dataset and remove education column}
+\NormalTok{norm\_model }\OtherTok{\textless{}{-}} \FunctionTok{preProcess}\NormalTok{(Bank, }\AttributeTok{method =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}range\textquotesingle{}}\NormalTok{))}
+\NormalTok{Bank\_normalized }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(norm\_model,Bank) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Education)}
+
+\CommentTok{\# Create dummy variables for education}
+\NormalTok{Bank}\SpecialCharTok{$}\NormalTok{Education }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(Bank}\SpecialCharTok{$}\NormalTok{Education)}
+
+\NormalTok{dummy\_model }\OtherTok{\textless{}{-}} \FunctionTok{dummyVars}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ Education, }\AttributeTok{data =}\NormalTok{ Bank)}
+\NormalTok{dummy\_vars }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{predict}\NormalTok{(dummy\_model, Bank))}
+
+\CommentTok{\# Add dummy vars to the dataset}
+\NormalTok{Bank\_normalized }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(dummy\_vars, Bank\_normalized)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Partition the data into 60\% training 40\% testing}
+\NormalTok{Train\_index }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(Bank\_normalized}\SpecialCharTok{$}\NormalTok{Personal.Loan, }\AttributeTok{p=}\FloatTok{0.60}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{Train }\OtherTok{\textless{}{-}}\NormalTok{ Bank\_normalized[Train\_index,]}
+\NormalTok{Test }\OtherTok{\textless{}{-}}\NormalTok{ Bank\_normalized[}\SpecialCharTok{{-}}\NormalTok{Train\_index,]}
+
+\CommentTok{\# Select the correct columns for training and testing variables}
+\NormalTok{Train\_Predictors}\OtherTok{\textless{}{-}}\NormalTok{Train[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{)]}
+\NormalTok{Test\_Predictors}\OtherTok{\textless{}{-}}\NormalTok{Test[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{)] }
+
+\NormalTok{Train\_labels }\OtherTok{\textless{}{-}}\NormalTok{Train[,}\DecValTok{12}\NormalTok{] }
+\NormalTok{Test\_labels  }\OtherTok{\textless{}{-}}\NormalTok{Test[,}\DecValTok{12}\NormalTok{] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a data frame for example customer in question 1}
+\NormalTok{Customer }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{ID =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{Age =} \DecValTok{40}\NormalTok{,}
+  \AttributeTok{Experience =} \DecValTok{10}\NormalTok{,}
+  \AttributeTok{Income =} \DecValTok{84}\NormalTok{,}
+  \AttributeTok{ZIP.Code =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{Family =} \DecValTok{2}\NormalTok{,}
+  \AttributeTok{CCAvg =} \DecValTok{2}\NormalTok{,}
+  \AttributeTok{Education =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{Mortgage =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{Personal.Loan =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{Securities.Account =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{CD.Account =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{Online =} \DecValTok{1}\NormalTok{,}
+  \AttributeTok{CreditCard =} \DecValTok{1}
+\NormalTok{)}
+
+\CommentTok{\# Normalize the customer using the previous normalization model (and add in the correct education values)}
+\NormalTok{Customer\_normalized }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(norm\_model, Customer)}
+
+\NormalTok{Customer\_normalized }\OtherTok{\textless{}{-}}\NormalTok{ Customer\_normalized }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Eudcation.1 =} \DecValTok{0}\NormalTok{,}
+         \AttributeTok{Education.2 =} \DecValTok{1}\NormalTok{,}
+         \AttributeTok{Education.3 =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{Education)}
+
+\CommentTok{\# Select the correct variables for training}
+\NormalTok{Customer\_Predictors }\OtherTok{\textless{}{-}}\NormalTok{ Customer\_normalized[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{9}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the KNN model using the customer as the predictor}
+\NormalTok{Predicted\_Test\_labels }\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(Train\_Predictors, }
+\NormalTok{                           Customer\_Predictors, }
+                           \AttributeTok{cl=}\NormalTok{Train\_labels, }
+                           \AttributeTok{k=}\DecValTok{1}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(Predicted\_Test\_labels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+## Levels: 0
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The output is zero meaning that the customer would be classified as
+  not accepting the loan.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creeate a data frame that will hold the accuracy values for all of the K values tested}
+\NormalTok{accuracy.df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{k =} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{accuracy =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{20}\NormalTok{))}
+
+\CommentTok{\# compute knn for different k on validation.}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{)\{}
+\NormalTok{  knn.pred }\OtherTok{\textless{}{-}} \FunctionTok{knn}\NormalTok{(Train\_Predictors, Test\_Predictors, }
+                  \AttributeTok{cl =}\NormalTok{ Train\_labels, }\AttributeTok{k =}\NormalTok{ i)}
+\NormalTok{  accuracy.df[i, }\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(knn.pred, }\FunctionTok{as.factor}\NormalTok{(Test\_labels))}\SpecialCharTok{$}\NormalTok{overall[}\StringTok{"Accuracy"}\NormalTok{]}
+\NormalTok{\}}
+
+\NormalTok{accuracy.df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     k accuracy
+## 1   1   0.9630
+## 2   2   0.9475
+## 3   3   0.9540
+## 4   4   0.9470
+## 5   5   0.9485
+## 6   6   0.9425
+## 7   7   0.9460
+## 8   8   0.9380
+## 9   9   0.9400
+## 10 10   0.9370
+## 11 11   0.9385
+## 12 12   0.9365
+## 13 13   0.9390
+## 14 14   0.9360
+## 15 15   0.9365
+## 16 16   0.9325
+## 17 17   0.9335
+## 18 18   0.9290
+## 19 19   0.9290
+## 20 20   0.9270
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  A choice of K that balances over fitting and ignoring the predictor
+  information usually requires testing multiple K values and calculating
+  the accuracy of the model on substantial testing data. In this case I
+  tested k values 1 through 20 and found the highest accuracy of 96\%
+  for K of 1 but to avoid overfitting I would choose a k of 5 which was
+  only lower in accuracy by less than 1\%.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{"gmodels"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'gmodels' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the model with the optimized K}
+\NormalTok{k1\_Predicted }\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(Train\_Predictors, }
+\NormalTok{                           Test\_Predictors, }
+                           \AttributeTok{cl=}\NormalTok{Train\_labels, }
+                           \AttributeTok{k=}\DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# Print the confusion matrix for question 3}
+\FunctionTok{CrossTable}\NormalTok{(}\AttributeTok{x=}\NormalTok{Test\_labels,}\AttributeTok{y=}\NormalTok{k1\_Predicted, }\AttributeTok{prop.chisq =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  2000 
+## 
+##  
+##              | k1_Predicted 
+##  Test_labels |         0 |         1 | Row Total | 
+## -------------|-----------|-----------|-----------|
+##            0 |      1798 |         8 |      1806 | 
+##              |     0.996 |     0.004 |     0.903 | 
+##              |     0.950 |     0.075 |           | 
+##              |     0.899 |     0.004 |           | 
+## -------------|-----------|-----------|-----------|
+##            1 |        95 |        99 |       194 | 
+##              |     0.490 |     0.510 |     0.097 | 
+##              |     0.050 |     0.925 |           | 
+##              |     0.048 |     0.050 |           | 
+## -------------|-----------|-----------|-----------|
+## Column Total |      1893 |       107 |      2000 | 
+##              |     0.947 |     0.053 |           | 
+## -------------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the KNN model using the previous customer as the predictor and with the new K value of 5}
+\NormalTok{Customer\_Test\_labels }\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(Train\_Predictors, }
+\NormalTok{                           Customer\_Predictors, }
+                           \AttributeTok{cl=}\NormalTok{Train\_labels, }
+                           \AttributeTok{k=}\DecValTok{5}\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(Customer\_Test\_labels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+## Levels: 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Partition the data into 50\% training 30\% validation and 20\% test}
+\NormalTok{Train\_index2 }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(Bank\_normalized}\SpecialCharTok{$}\NormalTok{Personal.Loan, }\AttributeTok{p=}\FloatTok{0.50}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{Train2 }\OtherTok{\textless{}{-}}\NormalTok{ Bank\_normalized[Train\_index2,]}
+\NormalTok{Place\_holder }\OtherTok{\textless{}{-}}\NormalTok{ Bank\_normalized[}\SpecialCharTok{{-}}\NormalTok{Train\_index2,]}
+
+\NormalTok{Train\_index3 }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(Place\_holder}\SpecialCharTok{$}\NormalTok{Personal.Loan, }\AttributeTok{p=}\FloatTok{0.6}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{Validation2 }\OtherTok{\textless{}{-}}\NormalTok{ Place\_holder[Train\_index3,]}
+\NormalTok{Test2 }\OtherTok{\textless{}{-}}\NormalTok{ Place\_holder[}\SpecialCharTok{{-}}\NormalTok{Train\_index3,]}
+
+\CommentTok{\# Select the correct columns for training and testing variables}
+\NormalTok{Train\_Predictors2 }\OtherTok{\textless{}{-}}\NormalTok{ Train2[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{)]}
+\NormalTok{Test\_Predictors2 }\OtherTok{\textless{}{-}}\NormalTok{ Test2[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{)]}
+\NormalTok{Validation\_Predictors2 }\OtherTok{\textless{}{-}}\NormalTok{ Validation2[,}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{12}\NormalTok{)]}
+
+\NormalTok{Train\_labels2 }\OtherTok{\textless{}{-}}\NormalTok{ Train2[,}\DecValTok{12}\NormalTok{] }
+\NormalTok{Test\_labels2  }\OtherTok{\textless{}{-}}\NormalTok{ Test2[,}\DecValTok{12}\NormalTok{] }
+\NormalTok{Validation\_labels2  }\OtherTok{\textless{}{-}}\NormalTok{ Validation2[,}\DecValTok{12}\NormalTok{] }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Testing data performance}
+\NormalTok{Q5TestSet }\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(Train\_Predictors2, }
+\NormalTok{                           Test\_Predictors2, }
+                           \AttributeTok{cl=}\NormalTok{Train\_labels2, }
+                           \AttributeTok{k=}\DecValTok{5}\NormalTok{)}
+
+\FunctionTok{CrossTable}\NormalTok{(}\AttributeTok{x=}\NormalTok{Test\_labels2,}\AttributeTok{y=}\NormalTok{Q5TestSet, }\AttributeTok{prop.chisq =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1000 
+## 
+##  
+##              | Q5TestSet 
+## Test_labels2 |         0 |         1 | Row Total | 
+## -------------|-----------|-----------|-----------|
+##            0 |       901 |         3 |       904 | 
+##              |     0.997 |     0.003 |     0.904 | 
+##              |     0.949 |     0.059 |           | 
+##              |     0.901 |     0.003 |           | 
+## -------------|-----------|-----------|-----------|
+##            1 |        48 |        48 |        96 | 
+##              |     0.500 |     0.500 |     0.096 | 
+##              |     0.051 |     0.941 |           | 
+##              |     0.048 |     0.048 |           | 
+## -------------|-----------|-----------|-----------|
+## Column Total |       949 |        51 |      1000 | 
+##              |     0.949 |     0.051 |           | 
+## -------------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Validation data performance}
+\NormalTok{Q5ValidationSet }\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(Train\_Predictors2, }
+\NormalTok{                           Validation\_Predictors2, }
+                           \AttributeTok{cl=}\NormalTok{Train\_labels2, }
+                           \AttributeTok{k=}\DecValTok{5}\NormalTok{)}
+
+\FunctionTok{CrossTable}\NormalTok{(}\AttributeTok{x=}\NormalTok{Validation\_labels2,}\AttributeTok{y=}\NormalTok{Q5ValidationSet, }\AttributeTok{prop.chisq =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1500 
+## 
+##  
+##                    | Q5ValidationSet 
+## Validation_labels2 |         0 |         1 | Row Total | 
+## -------------------|-----------|-----------|-----------|
+##                  0 |      1350 |         4 |      1354 | 
+##                    |     0.997 |     0.003 |     0.903 | 
+##                    |     0.943 |     0.058 |           | 
+##                    |     0.900 |     0.003 |           | 
+## -------------------|-----------|-----------|-----------|
+##                  1 |        81 |        65 |       146 | 
+##                    |     0.555 |     0.445 |     0.097 | 
+##                    |     0.057 |     0.942 |           | 
+##                    |     0.054 |     0.043 |           | 
+## -------------------|-----------|-----------|-----------|
+##       Column Total |      1431 |        69 |      1500 | 
+##                    |     0.954 |     0.046 |           | 
+## -------------------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Training data performance}
+\NormalTok{Q5TrainSet }\OtherTok{\textless{}{-}}\FunctionTok{knn}\NormalTok{(Train\_Predictors2, }
+\NormalTok{                           Train\_Predictors2, }
+                           \AttributeTok{cl=}\NormalTok{Train\_labels2, }
+                           \AttributeTok{k=}\DecValTok{5}\NormalTok{)}
+
+\FunctionTok{CrossTable}\NormalTok{(}\AttributeTok{x=}\NormalTok{Train\_labels2,}\AttributeTok{y=}\NormalTok{Q5TrainSet, }\AttributeTok{prop.chisq =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  2500 
+## 
+##  
+##               | Q5TrainSet 
+## Train_labels2 |         0 |         1 | Row Total | 
+## --------------|-----------|-----------|-----------|
+##             0 |      2256 |         6 |      2262 | 
+##               |     0.997 |     0.003 |     0.905 | 
+##               |     0.969 |     0.035 |           | 
+##               |     0.902 |     0.002 |           | 
+## --------------|-----------|-----------|-----------|
+##             1 |        72 |       166 |       238 | 
+##               |     0.303 |     0.697 |     0.095 | 
+##               |     0.031 |     0.965 |           | 
+##               |     0.029 |     0.066 |           | 
+## --------------|-----------|-----------|-----------|
+##  Column Total |      2328 |       172 |      2500 | 
+##               |     0.931 |     0.069 |           | 
+## --------------|-----------|-----------|-----------|
+## 
+## 
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  The training set performed the best, which makes sense as the model
+  has already utilized that data for the creation of the model. The
+  validation set performed the next best which I would assume is due to
+  it being a larger data set of 1500 data points compared to the test
+  set of 1000 but they were mostly similar due to them both being unseen
+  data to the model.
+\end{enumerate}
+
+\end{document}

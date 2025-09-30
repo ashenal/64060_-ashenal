@@ -2,38 +2,198 @@
 title: "Assignment_2"
 author: "Andrew Shenal"
 date: "2025-09-25"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 
-
-1. Load in data and create dummy variables
-
 ```{r}
+library(caret)
+library(FNN)
+library(tidyverse)
 
 Bank <- read.csv("./UniversalBank.csv")
 
-dummy_model <- dummyVars(~Education,data=Bank)
-dummy_vars <- predict(dummy_model, Bank)
+# Normalize dataset and remove education column
+norm_model <- preProcess(Bank, method = c('range'))
+Bank_normalized <- predict(norm_model,Bank) %>% 
+  select(-Education)
 
+# Create dummy variables for education
+Bank$Education <- as.factor(Bank$Education)
 
+dummy_model <- dummyVars(~ Education, data = Bank)
+dummy_vars <- as.data.frame(predict(dummy_model, Bank))
+
+# Add dummy vars to the dataset
+Bank_normalized <- cbind(dummy_vars, Bank_normalized)
 ```
 
-
-
-create partition: 40% testing, 60% training
 
 ```{r}
+# Partition the data into 60% training 40% testing
+Train_index <- createDataPartition(Bank_normalized$Personal.Loan, p=0.60, list=FALSE)
 
-Train_index <- createDataPartition(Carseats$Sales, p=0.75, list=FALSE)
+Train <- Bank_normalized[Train_index,]
+Test <- Bank_normalized[-Train_index,]
 
-Train_Data <- Carseats[Train_index,]
-Test_Data <- Carseats[-Train_index,]
+# Select the correct columns for training and testing variables
+Train_Predictors<-Train[,-c(4, 8, 12)]
+Test_Predictors<-Test[,-c(4, 8, 12)] 
 
+Train_labels <-Train[,12] 
+Test_labels  <-Test[,12] 
+```
+
+
+```{r}
+# Create a data frame for example customer in question 1
+Customer <- data.frame(
+  ID = 0,
+  Age = 40,
+  Experience = 10,
+  Income = 84,
+  ZIP.Code = 0,
+  Family = 2,
+  CCAvg = 2,
+  Education = 0,
+  Mortgage = 0,
+  Personal.Loan = 0,
+  Securities.Account = 0,
+  CD.Account = 0,
+  Online = 1,
+  CreditCard = 1
+)
+
+# Normalize the customer using the previous normalization model (and add in the correct education values)
+Customer_normalized <- predict(norm_model, Customer)
+
+Customer_normalized <- Customer_normalized %>% 
+  mutate(Eudcation.1 = 0,
+         Education.2 = 1,
+         Education.3 = 0) %>% 
+  select(-Education)
+
+# Select the correct variables for training
+Customer_Predictors <- Customer_normalized[-c(1,5,9)]
+```
+
+
+```{r}
+# Create the KNN model using the customer as the predictor
+Predicted_Test_labels <-knn(Train_Predictors, 
+                           Customer_Predictors, 
+                           cl=Train_labels, 
+                           k=1)
+
+head(Predicted_Test_labels)
+```
+1. The output is zero meaning that the customer would be classified as not accepting the loan. 
+
+
+```{r}
+# creeate a data frame that will hold the accuracy values for all of the K values tested
+accuracy.df <- data.frame(k = seq(1, 20, 1), accuracy = rep(0, 20))
+
+# compute knn for different k on validation.
+for(i in 1:20){
+  knn.pred <- knn(Train_Predictors, Test_Predictors, 
+                  cl = Train_labels, k = i)
+  accuracy.df[i, 2] <- confusionMatrix(knn.pred, as.factor(Test_labels))$overall["Accuracy"]
+}
+
+accuracy.df
+```
+
+2. A choice of K that balances over fitting and ignoring the predictor information usually requires testing multiple K values and calculating the accuracy of the model on substantial testing data. In this case I tested k values 1 through 20 and found the highest accuracy of 96% for K of 1 but to avoid overfitting I would choose a k of 5 which was only lower in accuracy by less than 1%. 
+
+```{r}
+library("gmodels")
+
+# Create the model with the optimized K
+k1_Predicted <-knn(Train_Predictors, 
+                           Test_Predictors, 
+                           cl=Train_labels, 
+                           k=5)
+
+# Print the confusion matrix for question 3
+CrossTable(x=Test_labels,y=k1_Predicted, prop.chisq = FALSE)
+```
+```{r}
+
+# Create the KNN model using the previous customer as the predictor and with the new K value of 5
+Customer_Test_labels <-knn(Train_Predictors, 
+                           Customer_Predictors, 
+                           cl=Train_labels, 
+                           k=5)
+
+head(Customer_Test_labels)
 
 ```
+```{r}
+# Partition the data into 50% training 30% validation and 20% test
+Train_index2 <- createDataPartition(Bank_normalized$Personal.Loan, p=0.50, list=FALSE)
+
+Train2 <- Bank_normalized[Train_index2,]
+Place_holder <- Bank_normalized[-Train_index2,]
+
+Train_index3 <- createDataPartition(Place_holder$Personal.Loan, p=0.6, list=FALSE)
+
+Validation2 <- Place_holder[Train_index3,]
+Test2 <- Place_holder[-Train_index3,]
+
+# Select the correct columns for training and testing variables
+Train_Predictors2 <- Train2[,-c(4, 8, 12)]
+Test_Predictors2 <- Test2[,-c(4, 8, 12)]
+Validation_Predictors2 <- Validation2[,-c(4, 8, 12)]
+
+Train_labels2 <- Train2[,12] 
+Test_labels2  <- Test2[,12] 
+Validation_labels2  <- Validation2[,12] 
+```
+
+```{r}
+# Testing data performance
+Q5TestSet <-knn(Train_Predictors2, 
+                           Test_Predictors2, 
+                           cl=Train_labels2, 
+                           k=5)
+
+CrossTable(x=Test_labels2,y=Q5TestSet, prop.chisq = FALSE)
+```
+```{r}
+# Validation data performance
+Q5ValidationSet <-knn(Train_Predictors2, 
+                           Validation_Predictors2, 
+                           cl=Train_labels2, 
+                           k=5)
+
+CrossTable(x=Validation_labels2,y=Q5ValidationSet, prop.chisq = FALSE)
+```
+```{r}
+# Training data performance
+Q5TrainSet <-knn(Train_Predictors2, 
+                           Train_Predictors2, 
+                           cl=Train_labels2, 
+                           k=5)
+
+CrossTable(x=Train_labels2,y=Q5TrainSet, prop.chisq = FALSE)
+```
+5. The training set performed the best, which makes sense as the model has already utilized that data for the creation of the model. The validation set performed the next best which I would assume is due to it being a larger data set of 1500 data points compared to the test set of 1000 but they were mostly similar due to them both being unseen data to the model. 
+
+
+
+
+
+
+
+
+
+
 
