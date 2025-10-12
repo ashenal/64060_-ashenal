@@ -1,0 +1,107 @@
+---
+title: "Assignment_3"
+author: "Andrew Shenal"
+date: "2025-10-07"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(caret)
+library(tidyverse)
+library(e1071)
+library(gmodels)
+
+set.seed(123)
+Bank <- read.csv("./UniversalBank.csv")
+
+Train_index <- createDataPartition(Bank$Personal.Loan, p=0.60, list=FALSE)
+
+Train <- Bank[Train_index,]
+Test <- Bank[-Train_index,]
+```
+
+A. Create a pivot table for the training data with Online as a column variable, CC as a row variable, and Loan as a secondary row variable. The values inside the table should convey the count. In R use functions melt() and cast(), or function table(). In Python, use panda dataframe methods melt() and pivot()
+```{r}
+
+PivotTableA <- table(Train$CreditCard, Train$Personal.Loan, Train$Online)
+print(PivotTableA)
+
+```
+
+B. Consider the task of classifying a customer who owns a bank credit card and is actively using online banking services. Looking at the pivot table, what is the probability that this customer will accept the loan offer? [This is the probability of loan acceptance (Loan = 1) conditional on having a bank credit card (CC = 1) and being an active user of online banking services (Online = 1)].
+
+    57/(475+57) = 10.71%
+    The probability of a person who owns a credit card and using online banking services accepting a loan is about 10.71%. 
+
+C. Create two separate pivot tables for the training data. One will have Loan (rows) as a function of Online (columns) and the other will have Loan (rows) as a function of CC.
+```{r}
+# Loan as a function of online
+PivotTableC1 <- table(Train$Personal.Loan, Train$Online)
+print(PivotTableC1)
+
+# Loan as a function of CC
+PivotTableC2 <- table(Train$Personal.Loan, Train$CreditCard)
+print(PivotTableC2)
+
+```
+D. Compute the following quantities [P(A | B) means “the probability ofA given B”]:
+i. P(CC = 1 | Loan = 1) (the proportion of credit card holders among the loan acceptors)
+
+    91/(187+91)= 32.73%
+    
+ii. P(Online = 1 | Loan = 1)
+
+    179/(99+179)= 64.39%
+
+iii. P(Loan = 1) (the proportion of loan acceptors)
+
+    (99+179)/3000= 9.27%
+
+iv. P(CC = 1 | Loan = 0)
+
+    792/(1930+792)= 29.1%
+
+v. P(Online = 1 | Loan = 0)
+
+    1620/(1102+1620)= 59.5%
+
+vi. P(Loan = 0)
+
+    (1102+1620)/3000= 90.73%
+
+E. Use the quantities computed above to compute the naive Bayes probability P(Loan = 1 | CC = 1, Online = 1).
+
+    (.3273*.6439*.0927)/((.3273*.6439*.0927)+(0.291*0.595*0.9073))= 11.04%
+
+F. Compare this value with the one obtained from the pivot table in (B). Which is a more accurate estimate?
+
+    The value obtained in the pivot table is amore accurate estimate as it is derived from the exact observed numbers in the dataset while the naive bayes probaility is based on assumed independence and normaility that may not hold entirely true in the dataset. 
+
+G. Which of the entries in this table are needed for computing P(Loan = 1 | CC = 1, Online = 1)?
+
+    All of the entries are needed because to compute naive bayes probability the denominator includes probability of both loan acceptance outcomes in the data. 
+
+Run naive Bayes on the data. Examine the model output on training data, and find the entry that corresponds to P(Loan = 1 | CC = 1, Online = 1). Compare this to the number you obtained in (E).
+```{r}
+
+# Make the NB model
+nb_model <- naiveBayes(Personal.Loan~CreditCard+Online, data = Train)
+
+# Apply the model to the training data with the probability outputs
+Predicted_Training <-predict(nb_model,Train, type = "raw")
+
+# Subset the data to where Cc and Online are both yes
+SubsetNB <- which(Train$CreditCard == 1 & Train$Online == 1)
+
+# Apply the subset and find the probabilities for Loan = 1
+Predicted_Training <- Predicted_Training[SubsetNB, ]
+head(Predicted_Training)
+
+```
+    The probability is about 11.14% for P(Loan = 1 | CC = 1, Online = 1) which is almost the exact same as my computed probability in part E of 11.04%. 

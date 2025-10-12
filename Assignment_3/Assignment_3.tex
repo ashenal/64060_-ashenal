@@ -1,0 +1,287 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Assignment\_3},
+  pdfauthor={Andrew Shenal},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Assignment\_3}
+\author{Andrew Shenal}
+\date{2025-10-07}
+
+\begin{document}
+\maketitle
+
+A. Create a pivot table for the training data with Online as a column
+variable, CC as a row variable, and Loan as a secondary row variable.
+The values inside the table should convey the count. In R use functions
+melt() and cast(), or function table(). In Python, use panda dataframe
+methods melt() and pivot()
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PivotTableA }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(Train}\SpecialCharTok{$}\NormalTok{CreditCard, Train}\SpecialCharTok{$}\NormalTok{Personal.Loan, Train}\SpecialCharTok{$}\NormalTok{Online)}
+\FunctionTok{print}\NormalTok{(PivotTableA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## , ,  = 0
+## 
+##    
+##        0    1
+##   0  785   65
+##   1  317   34
+## 
+## , ,  = 1
+## 
+##    
+##        0    1
+##   0 1145  122
+##   1  475   57
+\end{verbatim}
+
+B. Consider the task of classifying a customer who owns a bank credit
+card and is actively using online banking services. Looking at the pivot
+table, what is the probability that this customer will accept the loan
+offer? {[}This is the probability of loan acceptance (Loan = 1)
+conditional on having a bank credit card (CC = 1) and being an active
+user of online banking services (Online = 1){]}.
+
+\begin{verbatim}
+57/(475+57) = 10.71%
+The probability of a person who owns a credit card and using online banking services accepting a loan is about 10.71%. 
+\end{verbatim}
+
+C. Create two separate pivot tables for the training data. One will have
+Loan (rows) as a function of Online (columns) and the other will have
+Loan (rows) as a function of CC.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Loan as a function of online}
+\NormalTok{PivotTableC1 }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(Train}\SpecialCharTok{$}\NormalTok{Personal.Loan, Train}\SpecialCharTok{$}\NormalTok{Online)}
+\FunctionTok{print}\NormalTok{(PivotTableC1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##        0    1
+##   0 1102 1620
+##   1   99  179
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Loan as a function of CC}
+\NormalTok{PivotTableC2 }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(Train}\SpecialCharTok{$}\NormalTok{Personal.Loan, Train}\SpecialCharTok{$}\NormalTok{CreditCard)}
+\FunctionTok{print}\NormalTok{(PivotTableC2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##        0    1
+##   0 1930  792
+##   1  187   91
+\end{verbatim}
+
+D. Compute the following quantities {[}P(A \textbar{} B) means ``the
+probability ofA given B''{]}: i. P(CC = 1 \textbar{} Loan = 1) (the
+proportion of credit card holders among the loan acceptors)
+
+\begin{verbatim}
+91/(187+91)= 32.73%
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\setcounter{enumi}{1}
+\item
+  P(Online = 1 \textbar{} Loan = 1)
+
+  179/(99+179)= 64.39\%
+\item
+  P(Loan = 1) (the proportion of loan acceptors)
+\end{enumerate}
+
+\begin{verbatim}
+(99+179)/3000= 9.27%
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\setcounter{enumi}{3}
+\item
+  P(CC = 1 \textbar{} Loan = 0)
+
+  792/(1930+792)= 29.1\%
+\item
+  P(Online = 1 \textbar{} Loan = 0)
+
+  1620/(1102+1620)= 59.5\%
+\item
+  P(Loan = 0)
+
+  (1102+1620)/3000= 90.73\%
+\end{enumerate}
+
+E. Use the quantities computed above to compute the naive Bayes
+probability P(Loan = 1 \textbar{} CC = 1, Online = 1).
+
+\begin{verbatim}
+(.3273*.6439*.0927)/((.3273*.6439*.0927)+(0.291*0.595*0.9073))= 11.04%
+\end{verbatim}
+
+F. Compare this value with the one obtained from the pivot table in (B).
+Which is a more accurate estimate?
+
+\begin{verbatim}
+The value obtained in the pivot table is amore accurate estimate as it is derived from the exact observed numbers in the dataset while the naive bayes probaility is based on assumed independence and normaility that may not hold entirely true in the dataset. 
+\end{verbatim}
+
+G. Which of the entries in this table are needed for computing P(Loan =
+1 \textbar{} CC = 1, Online = 1)?
+
+\begin{verbatim}
+All of the entries are needed because to compute naive bayes probability the denominator includes probability of both loan acceptance outcomes in the data. 
+\end{verbatim}
+
+Run naive Bayes on the data. Examine the model output on training data,
+and find the entry that corresponds to P(Loan = 1 \textbar{} CC = 1,
+Online = 1). Compare this to the number you obtained in (E).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make the NB model}
+\NormalTok{nb\_model }\OtherTok{\textless{}{-}} \FunctionTok{naiveBayes}\NormalTok{(Personal.Loan}\SpecialCharTok{\textasciitilde{}}\NormalTok{CreditCard}\SpecialCharTok{+}\NormalTok{Online, }\AttributeTok{data =}\NormalTok{ Train)}
+
+\CommentTok{\# Apply the model to the training data with the probability outputs}
+\NormalTok{Predicted\_Training }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(nb\_model,Train, }\AttributeTok{type =} \StringTok{"raw"}\NormalTok{)}
+
+\CommentTok{\# Subset the data to where Cc and Online are both yes}
+\NormalTok{SubsetNB }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(Train}\SpecialCharTok{$}\NormalTok{CreditCard }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ Train}\SpecialCharTok{$}\NormalTok{Online }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{\# Apply the subset and find the probabilities for Loan = 1}
+\NormalTok{Predicted\_Training }\OtherTok{\textless{}{-}}\NormalTok{ Predicted\_Training[SubsetNB, ]}
+\FunctionTok{head}\NormalTok{(Predicted\_Training)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              0         1
+## [1,] 0.8843065 0.1156935
+## [2,] 0.8843065 0.1156935
+## [3,] 0.8843065 0.1156935
+## [4,] 0.8843065 0.1156935
+## [5,] 0.8843065 0.1156935
+## [6,] 0.8843065 0.1156935
+\end{verbatim}
+
+\begin{verbatim}
+The probability is about 11.14% for P(Loan = 1 | CC = 1, Online = 1) which is almost the exact same as my computed probability in part E of 11.04%. 
+\end{verbatim}
+
+\end{document}
