@@ -1,0 +1,74 @@
+---
+title: "Assignment_4"
+author: "Andrew Shenal"
+date: "2025-10-21"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(factoextra)
+library(tidyverse)
+library(flexclust)
+
+df1 <- read_csv("./Pharmaceuticals.csv") # Loads in csv file
+df <- df1[,c(3:11)] # Selects only columns 3 through 11 (the numerical variables) to use in the analysis
+df <- as.data.frame(df)
+set.seed(100)
+```
+
+
+a. Use only the numerical variables (1 to 9) to cluster the 21 firms. Justify the various choices made in conducting the cluster analysis, such as weights for different variables, the specific clustering algorithm(s) used, the number of clusters formed, and so on.
+```{r}
+
+df <- scale(df) # Normalize the data
+summary(df)
+
+fviz_nbclust(df, kmeans, method = "silhouette")
+```
+The average silhouette method shows five as the best number of clusters. Additionally, the data has a small sample set so I chose kmedians in order to limit any large impact from a single data point. 
+
+```{r}
+
+k4 = kcca(df, k=5, kccaFamily("kmedians"))
+k4 #prints cluster sizes
+
+
+clusters_index <- predict(k4)
+dist(k4@centers)
+image(k4)
+points(df, col=clusters_index, pch=19, cex=0.6)
+
+df$cluster <- predict(k4)
+
+
+df1 <- as.data.frame(df1)
+df1$cluster <- clusters_index
+```
+
+
+b. Interpret the clusters with respect to the numerical variables used in forming the clusters.
+
+Cluster 1: Shows companies that have stable growth and steady return on investment
+Cluster 2: Companies that have a larger share of the market cap with still consistent ROA and profit.
+Cluster 3: Companies that have strong profitability with high returns (ROI ROA).
+Cluster 4: These companies are smaller with greater variability in their returns. With higher beta and debt they are riskier overall.
+Cluster 5: These are very large companies with steady revenue and limited volatility (beta) and high asset turnover that suggests efficiency. 
+
+
+c. Is there a pattern in the clusters with respect to the numerical variables (10 to 12)? (those not used in forming the clusters)
+
+Yes, the most stable and large companies represented in clusters 1, 2, and 5 had had recommendations for Hold while the faster growing companies or more volatile companies in cluster 3 and 4 had recommendations for action - moderate buy or sell. I also noticed that the majority of locations outside the U.S. were represented in clusters 3 and 4. 
+
+d. Provide an appropriate name for each cluster using any or all of the variables in the dataset.
+
+1. Stable average performing companies
+2. Large stable low risk companies
+3. High performing growing companies
+4. Volatile Performers
+5. Large financially strong companies
