@@ -1,0 +1,115 @@
+---
+title: "Assignment_5"
+author: "Andrew Shenal"
+date: "2025-11-22"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Package Set-Up
+library(stats)
+library(cluster)
+library(mclust)
+set.seed(111)
+
+# Load data
+df <- read.csv("./Cereals.csv")
+
+# Make the cereal name the row names and remove the non-numerical columns for normalization
+row.names(df) <- df[,1]
+df <- df[,-(1:3)]
+
+# Remove missing values and Scale data
+df <- na.omit(df)
+df <- scale(df)
+
+```
+
+1. Apply hierarchical clustering to the data using Euclidean distance to the normalized
+measurements. Use Agnes to compare the clustering from single linkage, complete
+linkage, average linkage, and Ward. Choose the best method.
+
+```{r fig.height=8, fig.width=12}
+
+# Compute euclidean distance on the normalized data
+d <- dist(df, method = "euclidean")
+
+# Use agnes to apply the 4 clustering structures
+hc_single <- agnes(d, method = "single")
+hc_complete <- agnes(d, method = "complete")
+hc_average <- agnes(d, method = "average")
+hc_ward <- agnes(df, method = "ward")
+
+# Compare Agglomerative coefficients
+print(hc_single$ac) # 0.6067859
+print(hc_complete$ac) # 0.8353712
+print(hc_average$ac) # 0.7766075
+print(hc_ward$ac) # 0.9046042 - Highest and best option
+
+
+pltree(hc_ward, cex = 0.6, hang = -1, main = "Dendrogram of agnes")
+rect.hclust(hc_ward, k = 5, border = 1:4)
+```
+-  I would choose around 5 clusters. A larger number of clusters would have weaker differences and reduce the ability to identify differences while a smaller number would bring too many distinct clusters together. At around 5 the clusters have enough distance between them to show that they are different with clear identifiable separation. 
+
+
+
+Comment on the structure of the clusters and on their stability. Hint: To check stability,
+partition the data and see how well clusters formed based on one part apply to the other
+part. To do this:
+● Cluster partition A
+● Use the cluster centroids from A to assign each record in partition B (each record
+is assigned to the cluster with the closest centroid).
+● Assess how consistent the cluster assignments are compared to the
+assignments based on all the data.
+
+```{r}
+library(caret)
+library(mclust)
+
+set.seed(111)
+
+# split data
+idx <- createDataPartition(1:nrow(df), p = 0.7, list = FALSE)
+train <- df[idx, ]
+test <- df[-idx, ]
+
+# hierarchical clustering on training set
+d_train <- dist(train)
+hc_train <- agnes(d_train, method = "ward")
+cl_train <- cutree(hc_train, k = 5)
+
+# compute centroids for training clusters
+centroids <- aggregate(train, list(cl_train), mean)
+centroids <- centroids[,-1]
+
+# distance from each test row to each centroid
+dist_to_cent <- matrix(NA, nrow = nrow(test), ncol = nrow(centroids))
+for (i in 1:nrow(centroids)) {
+  dist_to_cent[, i] <- rowSums((test - centroids[i, ])^2)
+}
+
+pred_test <- apply(dist_to_cent, 1, which.min)
+
+# clustering test set directly
+d_test <- dist(test)
+hc_test <- agnes(d_test, method = "ward")
+true_test <- cutree(hc_test, k = 5)
+
+# stability
+adjustedRandIndex(pred_test, true_test)
+```
+After splitting the data and then testing the assignments, there is an ARI of 0 which indicates that the clusters are formed no better than random chance. I believe though that this is due to my method of splitting and testing the data as the full data method earlier shows clear differences between clusters.
+
+Based on the results from the previous dendrogram, the red left cluster that contains cereals such as 100% natural bran, raisin nut bran, and great grains would be best for a healthy rotation of cereals. The cluster contains enough cereals for variety and contains cereals that have higher than average fiber and protein with lower than average sugar. 
+
+Also, to obtain this information normalization is required. Columns such as calories contain a very high range compared to protein which is much smaller. Without normalization, the columns similar to calories would skew the data.
+
+
+

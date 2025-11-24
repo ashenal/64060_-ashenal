@@ -1,0 +1,315 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Assignment\_5},
+  pdfauthor={Andrew Shenal},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Assignment\_5}
+\author{Andrew Shenal}
+\date{2025-11-22}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Package Set{-}Up}
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(cluster)}
+\FunctionTok{library}\NormalTok{(mclust)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'mclust' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## Package 'mclust' version 6.1.2
+## Type 'citation("mclust")' for citing this R package in publications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{111}\NormalTok{)}
+
+\CommentTok{\# Load data}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./Cereals.csv"}\NormalTok{)}
+
+\CommentTok{\# Make the cereal name the row names and remove the non{-}numerical columns for normalization}
+\FunctionTok{row.names}\NormalTok{(df) }\OtherTok{\textless{}{-}}\NormalTok{ df[,}\DecValTok{1}\NormalTok{]}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df[,}\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)]}
+
+\CommentTok{\# Remove missing values and Scale data}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(df)}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{scale}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Apply hierarchical clustering to the data using Euclidean distance to
+  the normalized measurements. Use Agnes to compare the clustering from
+  single linkage, complete linkage, average linkage, and Ward. Choose
+  the best method.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute euclidean distance on the normalized data}
+\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(df, }\AttributeTok{method =} \StringTok{"euclidean"}\NormalTok{)}
+
+\CommentTok{\# Use agnes to apply the 4 clustering structures}
+\NormalTok{hc\_single }\OtherTok{\textless{}{-}} \FunctionTok{agnes}\NormalTok{(d, }\AttributeTok{method =} \StringTok{"single"}\NormalTok{)}
+\NormalTok{hc\_complete }\OtherTok{\textless{}{-}} \FunctionTok{agnes}\NormalTok{(d, }\AttributeTok{method =} \StringTok{"complete"}\NormalTok{)}
+\NormalTok{hc\_average }\OtherTok{\textless{}{-}} \FunctionTok{agnes}\NormalTok{(d, }\AttributeTok{method =} \StringTok{"average"}\NormalTok{)}
+\NormalTok{hc\_ward }\OtherTok{\textless{}{-}} \FunctionTok{agnes}\NormalTok{(df, }\AttributeTok{method =} \StringTok{"ward"}\NormalTok{)}
+
+\CommentTok{\# Compare Agglomerative coefficients}
+\FunctionTok{print}\NormalTok{(hc\_single}\SpecialCharTok{$}\NormalTok{ac) }\CommentTok{\# 0.6067859}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6067859
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(hc\_complete}\SpecialCharTok{$}\NormalTok{ac) }\CommentTok{\# 0.8353712}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8353712
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(hc\_average}\SpecialCharTok{$}\NormalTok{ac) }\CommentTok{\# 0.7766075}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7766075
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(hc\_ward}\SpecialCharTok{$}\NormalTok{ac) }\CommentTok{\# 0.9046042 {-} Highest and best option}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9046042
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pltree}\NormalTok{(hc\_ward, }\AttributeTok{cex =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{hang =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{main =} \StringTok{"Dendrogram of agnes"}\NormalTok{)}
+\FunctionTok{rect.hclust}\NormalTok{(hc\_ward, }\AttributeTok{k =} \DecValTok{5}\NormalTok{, }\AttributeTok{border =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Assignment_5_files/figure-latex/unnamed-chunk-2-1.pdf}
+- I would choose around 5 clusters. A larger number of clusters would
+have weaker differences and reduce the ability to identify differences
+while a smaller number would bring too many distinct clusters together.
+At around 5 the clusters have enough distance between them to show that
+they are different with clear identifiable separation.
+
+Comment on the structure of the clusters and on their stability. Hint:
+To check stability, partition the data and see how well clusters formed
+based on one part apply to the other part. To do this: ● Cluster
+partition A ● Use the cluster centroids from A to assign each record in
+partition B (each record is assigned to the cluster with the closest
+centroid). ● Assess how consistent the cluster assignments are compared
+to the assignments based on all the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'caret' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: ggplot2
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(mclust)}
+
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{111}\NormalTok{)}
+
+\CommentTok{\# split data}
+\NormalTok{idx }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(df), }\AttributeTok{p =} \FloatTok{0.7}\NormalTok{, }\AttributeTok{list =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ df[idx, ]}
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ df[}\SpecialCharTok{{-}}\NormalTok{idx, ]}
+
+\CommentTok{\# hierarchical clustering on training set}
+\NormalTok{d\_train }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(train)}
+\NormalTok{hc\_train }\OtherTok{\textless{}{-}} \FunctionTok{agnes}\NormalTok{(d\_train, }\AttributeTok{method =} \StringTok{"ward"}\NormalTok{)}
+\NormalTok{cl\_train }\OtherTok{\textless{}{-}} \FunctionTok{cutree}\NormalTok{(hc\_train, }\AttributeTok{k =} \DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# compute centroids for training clusters}
+\NormalTok{centroids }\OtherTok{\textless{}{-}} \FunctionTok{aggregate}\NormalTok{(train, }\FunctionTok{list}\NormalTok{(cl\_train), mean)}
+\NormalTok{centroids }\OtherTok{\textless{}{-}}\NormalTok{ centroids[,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+
+\CommentTok{\# distance from each test row to each centroid}
+\NormalTok{dist\_to\_cent }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\AttributeTok{nrow =} \FunctionTok{nrow}\NormalTok{(test), }\AttributeTok{ncol =} \FunctionTok{nrow}\NormalTok{(centroids))}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(centroids)) \{}
+\NormalTok{  dist\_to\_cent[, i] }\OtherTok{\textless{}{-}} \FunctionTok{rowSums}\NormalTok{((test }\SpecialCharTok{{-}}\NormalTok{ centroids[i, ])}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+
+\NormalTok{pred\_test }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(dist\_to\_cent, }\DecValTok{1}\NormalTok{, which.min)}
+
+\CommentTok{\# clustering test set directly}
+\NormalTok{d\_test }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(test)}
+\NormalTok{hc\_test }\OtherTok{\textless{}{-}} \FunctionTok{agnes}\NormalTok{(d\_test, }\AttributeTok{method =} \StringTok{"ward"}\NormalTok{)}
+\NormalTok{true\_test }\OtherTok{\textless{}{-}} \FunctionTok{cutree}\NormalTok{(hc\_test, }\AttributeTok{k =} \DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# stability}
+\FunctionTok{adjustedRandIndex}\NormalTok{(pred\_test, true\_test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+After splitting the data and then testing the assignments, there is an
+ARI of 0 which indicates that the clusters are formed no better than
+random chance. I believe though that this is due to my method of
+splitting and testing the data as the full data method earlier shows
+clear differences between clusters.
+
+Based on the results from the previous dendrogram, the red left cluster
+that contains cereals such as 100\% natural bran, raisin nut bran, and
+great grains would be best for a healthy rotation of cereals. The
+cluster contains enough cereals for variety and contains cereals that
+have higher than average fiber and protein with lower than average
+sugar.
+
+Also, to obtain this information normalization is required. Columns such
+as calories contain a very high range compared to protein which is much
+smaller. Without normalization, the columns similar to calories would
+skew the data.
+
+\end{document}
